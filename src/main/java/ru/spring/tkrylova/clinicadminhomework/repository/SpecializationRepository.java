@@ -6,6 +6,9 @@ import ru.spring.tkrylova.clinicadminhomework.entity.Specialization;
 import java.util.List;
 
 public interface SpecializationRepository extends JpaRepository<Specialization, Integer> {
-    List<Specialization> findAllByActiveEquals(boolean active);
-    List<Specialization> findAllByActiveFalse();
+List<Specialization> findAllByIsActiveEquals(boolean active);
+
+List<Specialization> findAllByIsActiveIsTrue();
+
+List<Specialization> findAllByIsActiveFalse();
 }

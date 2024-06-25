@@ -12,6 +12,6 @@ public class DoctorService {
     }
 
     public int getCountActiveInactiveDoctors(boolean isActive) {
-        return doctorRepository.findAllByActiveEquals(isActive).size();
+        return doctorRepository.findAllByIsActiveEquals(isActive).size();
     }
 }
