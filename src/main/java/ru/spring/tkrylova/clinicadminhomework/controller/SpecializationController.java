@@ -16,22 +16,24 @@ import java.util.List;
 @Validated
 @RequestMapping("/specialization")
 public class SpecializationController {
-    private final SpecializationService specializationService;
 
-    public SpecializationController(SpecializationService specializationService) {
-        this.specializationService = specializationService;
-    }
+  private final SpecializationService specializationService;
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createSpecialization(@RequestBody @Valid Specialization spec) throws URISyntaxException {
-        int id = specializationService.createSpecialization(spec);
-        URI location = new URI(String.format("http://localhost:8080/specialization/%s", id));
-        return ResponseEntity.created(location)
-                .build();
-    }
+  public SpecializationController(SpecializationService specializationService) {
+    this.specializationService = specializationService;
+  }
 
-    @GetMapping("/inactive")
-    public List<SpecializationGetInactiveDto> getInactiveSpecialization() {
-        return specializationService.getSpecializations(false);
-    }
+  @PostMapping("/create")
+  public ResponseEntity<?> createSpecialization(@RequestBody @Valid Specialization spec)
+      throws URISyntaxException {
+    int id = specializationService.createSpecialization(spec);
+    URI location = new URI(String.format("http://localhost:8080/specialization/%s", id));
+    return ResponseEntity.created(location)
+        .build();
+  }
+
+  @GetMapping("/inactive")
+  public List<SpecializationGetInactiveDto> getInactiveSpecialization() {
+    return specializationService.getSpecializationsIsActive(false);
+  }
 }

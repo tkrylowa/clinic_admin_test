@@ -1,0 +1,21 @@
+<!-- фрагмент можно переиспользовать по имени menu
+     необходимо передать список специализаций-->
+<nav th:fragment="menu(specializations)">
+    <a th:each="specialization : ${specializations}"
+       th:text="${specialization.name}"
+       th:href="@{/doctor/specialization/{code}
+       (code=${specialization.code})}"></a>
+</nav>
+
+<div th:fragment="menu(doctors)">
+    <section th:each="doctor: ${doctors}">
+        <h2 th:text="${doctor.lastName}"></h2>
+        <p th:text="${doctor.experience}"></p>
+    </section>
+</div>
+
+
+<!-- фрагмент можно переиспользовать по имени footer -->
+<footer th:fragment="footer">
+    Подвал Сайта
+</footer>

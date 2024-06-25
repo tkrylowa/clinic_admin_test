@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${doctor_info.lastName}"></title>
+</head>
+<body>
+<section th:insert="~{./fragments.html :: menu(${specialization_list})}"></section>
+<section>
+  <h2 th:text="${doctor_info.firstName}"> <!--    thymeleaf обращается по факту к геттерам--></h2>
+  <p th:text="${doctor_info.experience}"></p>
+</section>
+<div th:replace="~{./fragments.html :: footer}"></div>
+</body>
+</html>

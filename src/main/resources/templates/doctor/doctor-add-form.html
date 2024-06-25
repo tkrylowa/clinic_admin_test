@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add new doctor</title>
+</head>
+<body>
+<form method="post" th:action="@{/doctor}" th:object="${doctor}">
+  <label>Put the name<input type="text" th:field="*{doctor.firstName}">
+    <span th:if="${#fields.hasErrors('firstName')}"
+    th:errors="*{firstName}">
+
+    </span>
+  </label>
+  <label>Put the last name
+    <input type="text" th:field="*{doctor.lastName}">
+    <span th:if="${#fields.hasErrors('lastName')}"
+          th:errors="*{lastName}">
+
+    </span>
+  </label>
+  <label>Put the experience
+    <input type="number" th:field="*{doctor.experience}">
+    <span th:if="${#fields.hasErrors('experience')}"
+          th:errors="*{experience}">
+        </span>
+  </label>
+  <input type="submit" value="Save">
+</form>
+</body>
+</html>

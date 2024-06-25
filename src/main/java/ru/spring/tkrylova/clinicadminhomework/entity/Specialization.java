@@ -17,26 +17,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "specialization")
 public class Specialization {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
-    @Column(name = "name", nullable = false)
-    @JsonProperty(value = "specialization_name")
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-    @Column(name = "code_latin", nullable = false, unique = true)
-    @JsonProperty(value = "specialization_code")
-    private String code;
+  @Column(name = "name", nullable = false)
+  @JsonProperty(value = "specialization_name")
+  private String name;
 
-    //    TEXT
-    @Column(name = "description", length = 3000)
-    private String description;
+  @Column(name = "code_latin", nullable = false, unique = true)
+  @JsonProperty(value = "specialization_code")
+  private String code;
 
-    @Column(name = "is_active", insertable = false, columnDefinition = "BOOLEAN DEFAULT true", updatable = false)
-    @JsonProperty(value = "enable")
-    private boolean isActive;
+  //    TEXT
+  @Column(name = "description", length = 3000)
+  private String description;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP", updatable = false)
-    private LocalDateTime createdAt;
+  @Column(name = "is_active", insertable = false, columnDefinition = "BOOLEAN DEFAULT true", updatable = false)
+  @JsonProperty(value = "enable")
+  private boolean isActive;
+
+  @Column(name = "created_at", columnDefinition = "TIMESTAMP", updatable = false)
+  private LocalDateTime createdAt;
 }

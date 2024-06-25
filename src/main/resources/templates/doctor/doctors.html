@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctors list</title>
+</head>
+<body>
+<div th:each="doctor: ${doctor_list}">
+  <section>
+    <h2 th:text="${doctor.lastName}"> <!--    thymeleaf обращается по факту к геттерам--></h2>
+    <p th:text="${doctor.experience}"></p>
+    <!--    thymeleaf для ссылок всегда используем префикс th для ссылки генерирующейся на основе данных
+     генерируюмых контроллером используем @-->
+    <a th:href="@{/doctor/{id}(id=${doctor.id})}">Details:</a>
+  </section>
+</div>
+<div th:each="spec: ${specialization_list}">
+  <section>
+    <h2 th:text="${spec.name}"></h2>
+    <p th:text="${spec.code}"></p>
+  </section>
+</div>
+</body>
+</html>
