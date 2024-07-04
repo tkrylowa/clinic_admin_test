@@ -2,6 +2,7 @@ package ru.spring.tkrylova.clinicadminhomework.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,18 +12,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.spring.tkrylova.clinicadminhomework.entity.Doctor;
 import ru.spring.tkrylova.clinicadminhomework.entity.Specialization;
 import ru.spring.tkrylova.clinicadminhomework.service.DoctorService;
+import ru.spring.tkrylova.clinicadminhomework.service.PatientService;
 import ru.spring.tkrylova.clinicadminhomework.service.SpecializationService;
+import ru.spring.tkrylova.clinicadminhomework.service.notification.NotificationService;
 
 @Controller
 public class DoctorController {
 
   private final DoctorService doctorService;
   private final SpecializationService specializationService;
+  private final PatientService patientService;
+  private final NotificationService notificationService;
 
   public DoctorController(DoctorService doctorService,
-      SpecializationService specializationService) {
+      SpecializationService specializationService, PatientService patientService,
+      NotificationService notificationService) {
     this.doctorService = doctorService;
     this.specializationService = specializationService;
+    this.patientService = patientService;
+    this.notificationService = notificationService;
   }
 
   @GetMapping("/doctors")
@@ -42,7 +50,7 @@ public class DoctorController {
   }
 
   @GetMapping("/doctor/form")
-  public String getDoctorAddForm(Doctor doctor) {
+  public String getDoctorAddForm() {
     return "doctor/doctor-add-form";
   }
 
@@ -53,6 +61,16 @@ public class DoctorController {
       return "doctor/doctor-add-form";
     }
     doctorService.addDoctor(doctor);
+    int cnt = patientService.getCountOfPatients();
+    int step = cnt / 100;
+    if (step == 0) {
+      patientService.getListOfPatientInPage(PageRequest.of(0, cnt));
+    }
+    while (step < cnt) {
+      patientService.getListOfPatientInPage(PageRequest.of(0, step)).forEach(patient -> notificationService.sendEmailAfterNewDoctorAppear(patient, doctor));
+
+      step += step + 1;
+    }
     return "redirect:/doctor/form";
   }
 
