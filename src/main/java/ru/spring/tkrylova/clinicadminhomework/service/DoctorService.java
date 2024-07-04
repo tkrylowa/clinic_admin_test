@@ -7,7 +7,7 @@ import ru.spring.tkrylova.clinicadminhomework.repository.DoctorRepository;
 
 @Service
 public class DoctorService {
-    private DoctorRepository doctorRepository;
+    private final DoctorRepository doctorRepository;
 
     public DoctorService(DoctorRepository doctorRepository) {
         this.doctorRepository = doctorRepository;
@@ -69,7 +69,7 @@ public class DoctorService {
         return doctors;
     }
 
-    public void addDoctor(Doctor doctor) {
-        doctorRepository.save(doctor);
+    public int addDoctor(Doctor doctor) {
+        return doctorRepository.save(doctor).getId();
     }
 }

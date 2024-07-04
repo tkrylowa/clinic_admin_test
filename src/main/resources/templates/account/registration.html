@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание аккаунта</title>
+</head>
+<body>
+
+<span th:if="${error}">Пользователь уже существует</span>
+
+<form method="POST" th:action="@{/account/registration}" th:object="${contentManagerUser}">
+    <input type="text" placeholder="Введите email" th:field="*{email}">
+    <input type="password" placeholder="Введите пароль" th:field="*{password}">
+    <input type="submit" value="Создать аккаунт">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма входа</title>
+</head>
+<body>
+<span th:if="${param.failed}">Ошибка авторизации</span>
+
+<form method="POST" th:action="@{/account/login}">
+    <input type="text" placeholder="Введите email" name="application_user_email">
+    <input type="password" placeholder="Введите пароль" name="application_user_password">
+    <input type="submit" value="Создать аккаунт">
+</form>
+</body>
+</html>
