@@ -25,7 +25,7 @@ public class AccountService {
 
     public void registration(ContentManagerUser user) throws AccountException {
         if (contentManagerUserRepository.existsByEmail(user.getEmail())) {
-            throw new AccountException("Username is already taken");
+            throw new AccountException("Email is already taken");
         }
         userRoleRepository.findByRoleType(RoleType.ROLE_MODERATOR_USER)
                 .ifPresentOrElse(user::setUserRole,
